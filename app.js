@@ -3,6 +3,7 @@ const mongoose=require ('mongoose');
 const env=require('dotenv/config')
 const Book=require('./Models/books');
 const Author=require('./Models/authors');
+const Review=require('./Models/reviews')
 
 
 
@@ -83,10 +84,26 @@ app.post('/books/author', (req,res)=>{
 
     })
 
-
 })
 
+//add reviews to the data base
 
+app.post('/books/reviews', (req,res)=>{
+    const reviews = new Review({
+        Name: req.body.Name,
+        bookTitle: req.body.bookTitle,
+        reviews: req.body.reviews,
+        datereviews:req.body.datereviews
+    
+    })
+    console.log(reviews)
+    reviews.save()
+    .then((result)=>{
+        res.send(result)
+    }).catch((err)=>{
 
+        res.status(500).send(err)
 
+    })
 
+})
