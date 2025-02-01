@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 
 //middleware
 
-
+app.use(express.static("./public"));
 //home page
 
 app.get('/',(req,res)=>{
@@ -113,3 +113,13 @@ app.post('/books/reviews', (req,res)=>{
 })
 
 //render the list of books/
+
+app.get('/books',(req,res)=>{
+
+        Book.find().then((result)=>{
+
+            res.render('books',{Book})
+            
+        })
+
+})
