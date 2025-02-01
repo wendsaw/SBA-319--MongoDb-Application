@@ -1,74 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%-include("./partials/head.ejs")%>
-
+  <%-include("./partials/head.ejs")%>
 <body>
     <%-include("./partials/nav.ejs")%>
-    <h4 class="id">
-        <%=presi.rank%>
-        
-    </h4>
-    <h3 class="last">
-        <%=presi.lastName%> <%=presi.firstName%>
-    </h3>
-    <h4 class="title">
-        <%=presi.title%>
-    </h4>
+      <div class="employee-content">
+        <h2>List of All Books</h2>
+        <% if (result.length>0){%>
+          <% result.forEach(e =>{ %>
+            <a  class="single" href="/Book/<%=e.id %>">
+            <h3 class="last"><%=e.title%> by <%=e.author%></h3>
+            <!-- <p class="first"><%=e.firstName%></p> -->
+            <h4 class="title">Published:<%=e.published%></h4>
+          </a>
+            <%})%>
+       <% } else {%>
+        <p>File empty</p>
+        <%}%>
 
-    <h4 class="title">
-       Birth Date: <%=presiLife.dateBirth%>
-    </h4>
-    <h4 class="title">
-      State:<%=presiLife.placeBirth%>
-    </h4>
-    <h4 class="title">
-    Education Level:  <%=presiLife.levelEducation%>
-    </h4>
-    <h4 class="title">
-    Mariatal Stutus:<%=presiLife.mariatalStatus%>
-    </h4>
-    <h4 class="title">
-      Kids Number:  <%=presiLife.numberKids%>
-    </h4>
-
-    <h4 class="title">
-      Comment:  <%=presi.content%>
-    </h4>
-    <a href="" class="edit" data ="<%=presi.id%>">update</a>
-    <a href="" class="delete" data ="<%=presi.id%>">delete</a>
-    <%-include("./partials/footer.ejs")%>
-
-    <script>
-        
-        const delet=document.querySelector('a.delete');
-        const update=document.querySelector('a.edit');
-        console.log(delet);
-        delet.addEventListener('click',(e)=>{
-            event.preventDefault()
-            const id = delet.getAttribute('data');
-            console.log(`id is ${id}`);
-            base=`/president/${id}`
-            fetch(base, {
-                method:'delete'
-            }).then((result)=>{
-                console.log('file delete');
-                
-            }).catch(Error=>{
-                console.log(Error);
-            })
-                window.location.href='http://localhost:3000'
-            
-        })
-
-        update.addEventListener('click',(e)=>{
-            event.preventDefault()
-            const id = update.getAttribute('data');
-
-            window.location.href='http://localhost:3000////'
-            
-        })
-        
-    </script>
+      </div>
+      
 </body>
-
+<%-include("./partials/footer.ejs")%>
 </html>

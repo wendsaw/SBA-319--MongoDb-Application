@@ -118,7 +118,11 @@ app.get('/books',(req,res)=>{
 
         Book.find().then((result)=>{
 
-            res.render('books',{Book})
+          
+            // res.send(result)
+            
+
+            res.render('books',{result})
             
         })
 
