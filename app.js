@@ -1,7 +1,8 @@
 const express =require ('express');
 const mongoose=require ('mongoose');
 const env=require('dotenv/config')
-const Book=require('./Models/books')
+const Book=require('./Models/books');
+const Author=require('./Models/authors');
 
 
 
@@ -38,7 +39,7 @@ app.get('/',(req,res)=>{
 
 //add books to the data base
 
-app.post('/books/addbooks', (req,res)=>{
+app.post('/addbooks', (req,res)=>{
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
@@ -52,6 +53,28 @@ app.post('/books/addbooks', (req,res)=>{
     })
     console.log(book)
     book.save()
+    .then((result)=>{
+        res.send(result)
+    }).catch((err)=>{
+
+        res.status(500).send(err)
+
+    })
+
+
+})
+//add authors to the data base
+
+app.post('/books/author', (req,res)=>{
+    const author = new Author({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        nationalite: req.body.nationalite,
+        nombrebooks:req.body.nombrebooks
+    
+    })
+    console.log(author)
+    author.save()
     .then((result)=>{
         res.send(result)
     }).catch((err)=>{
