@@ -1,18 +1,10 @@
 const express =require ('express');
 const mongoose=require ('mongoose');
-const env=require('dotenv/config')
-const Book=require('./Models/books');
-const Author=require('./Models/authors');
-const Review=require('./Models/reviews')
-
-
-
-// view engine
-
-
-//middleware
-
-
+const env=require('dotenv/config');
+const morgan=require('morgan')
+const Book=require('./models/books');
+const Author=require('./models/authors');
+const Review=require('./models/reviews');
 
 //app setup and db connection
 const app=express();
@@ -21,22 +13,34 @@ app.use(express.json());
 
 
 mongoose.connect(process.env.URL).then(()=>{
-
     app.listen(3000,()=>{
         console.log("listening on port 3000");
-        console.log('data base connected');
-        
+        console.log('data base connected'); 
     })
-
 }).catch((err)=>{
     console.log(erro);
     
 })
 
+
+// view engine
+app.use(morgan('dev'))
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+
+
+//middleware
+
+
+//home page
+
 app.get('/',(req,res)=>{
 
-    res.send('home page')
-})
+    
+    res.render('home');
+   
+   })
 
 //add books to the data base
 
@@ -107,3 +111,5 @@ app.post('/books/reviews', (req,res)=>{
     })
 
 })
+
+//render the list of books/
