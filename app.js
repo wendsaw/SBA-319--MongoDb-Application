@@ -98,7 +98,8 @@ app.post('/books/reviews', (req,res)=>{
         bookTitle: req.body.bookTitle,
         reviews: req.body.reviews,
         datereviews:req.body.datereviews
-    
+
+        
     })
     console.log(reviews)
     reviews.save()
@@ -184,6 +185,15 @@ app.get('/reviews', (req, res) => {
     })
 
 
+})
+
+
+app.get('/reviews/form', (req,res)=>{
+
+
+    
+        res.render('reviewform')
+   
 })
 
 ///put or patch request

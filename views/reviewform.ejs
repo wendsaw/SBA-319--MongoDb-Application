@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include("./partials/head.ejs")%>
+<body>
+  <%-include("./partials/nav.ejs")%>
+      <div class="create-employee content">
+        <form action="/books/reviews" method="POST">
+          <label for="Name"> Name</label>
+          <input type="text" id='Name' name="Name" required>
+          <label for="bookTitle"> Book Title</label>
+          <input type="text" id='bookTitle' name="bookTitle" required>
+          <label for="reviews">Review your Book</label>
+          <textarea name="reviews" id="reviews" name="reviews" required></textarea>
+          <label for="datereviews">Please enter date</label>
+          <input type="text" id='datereviews' name="datereviews" required>
+        <button>Submit</button>
+        </form>
+      </div>
+      
+      <%-include("./partials/footer.ejs")%>
+      
+</body>
+
+</html>
