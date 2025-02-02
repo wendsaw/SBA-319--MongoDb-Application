@@ -124,6 +124,44 @@ app.get('/books',(req,res)=>{
 
             res.render('books',{result})
             
+        }).catch((err)=>{
+            console.log(err);
+            
         })
 
+})
+
+app.get('/book/:id', (req, res) => {
+
+    Book.findById(req.params.id)
+    .then((result)=>{
+
+        res.render('bookdetails', {result})
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+    
+})
+
+app.get('/author/:author', (req, res) => {
+
+    console.log(req.params.author);
+
+    Author.find({firstName:req.params.author})
+    
+    .then((results)=>{
+
+        console.log(results);
+        
+        res.render('author', {results})
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+
+
+    
 })

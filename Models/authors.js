@@ -1,17 +1,17 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
-
 const authorSchema=new Schema({
+
+    lastName:{
+        type:String,
+        require:true
+    },
 
     firstName:{
         type:String,
         required:true
-    },
-    lastName:{
-        type:String,
-        required:true
-    
+        
     },
     nationalite:{
         type:String,
@@ -21,7 +21,10 @@ const authorSchema=new Schema({
     nombrebooks:{
         type:Number,
         required:true
-    }
+    },
+
+   
+
 
 }, {timestamps:true})
 

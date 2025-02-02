@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%-include("./partials/head.ejs")%>
+
+<body>
+    <%-include("./partials/nav.ejs")%>
+    <h4 class="id">
+       Book Title: <%=result.title%>
+        
+    </h4>
+    <h3 class="last">
+    <a href="/author/<%=result.author %>">Author Name: <%=result.author%></a>
+    </h3>
+
+    <h4 class="title">
+     Pages Number:<%=result.pages%>
+    </h4>
+    <h4 class="title">
+     Genre: <%=result.genres%>
+    </h4>
+    <h4 class="title">
+  Date Published:<%=result.published%>
+    </h4>
+    <h4 class="title">
+   Rating and Reviews: <%=result.rating%>
+    </h4>
+    <h4 class="title">
+    Words Count: <%=result.words%>
+    </h4>
+
+    <h4 class="title">
+   Book Language: <%=result.language%>
+    </h4>
+    <!-- <a href="" class="edit" data ="<%=result.id%>">update</a> -->
+    <a href="" class="delete" data ="<%=result.id%>">BUY Me</a>
+    <%-include("./partials/footer.ejs")%>
+
+    <!-- <script>
+        
+        const delet=document.querySelector('a.delete');
+        const update=document.querySelector('a.edit');
+        console.log(delet);
+        delet.addEventListener('click',(e)=>{
+            event.preventDefault()
+            const id = delet.getAttribute('data');
+            console.log(`id is ${id}`);
+            base=`/president/${id}`
+            fetch(base, {
+                method:'delete'
+            }).then((result)=>{
+                console.log('file delete');
+                
+            }).catch(Error=>{
+                console.log(Error);
+            })
+                window.location.href='http://localhost:3000'
+            
+        })
+
+        update.addEventListener('click',(e)=>{
+            event.preventDefault()
+            const id = update.getAttribute('data');
+
+            window.location.href='http://localhost:3000////'
+            
+        })
+        
+    </script> -->
+</body>
+
+</html>
