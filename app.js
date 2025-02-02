@@ -150,10 +150,10 @@ app.get('/author/:author', (req, res) => {
     console.log(req.params.author);
 
     Author.find({firstName:req.params.author})
-    
+
     .then((results)=>{
 
-        console.log(results);
+        console.log(results[0].nationalite);
         
         res.render('author', {results})
         
