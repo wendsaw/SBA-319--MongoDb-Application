@@ -165,3 +165,24 @@ app.get('/author/:author', (req, res) => {
 
     
 })
+
+
+
+
+app.get('/reviews', (req, res) => {
+
+    Review.find().then((result)=>{
+
+          
+       
+        
+
+        res.render('reviews',{result})
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+
+
+})

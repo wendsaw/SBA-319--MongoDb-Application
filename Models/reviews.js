@@ -11,8 +11,8 @@ const reviewSchema=new Schema({
     bookTitle:{
         type:String,
         required:true,
-        unique:['Things Fall Apart','Disgrace ',' Cry, the Beloved Country'
-            ,' Season of Migration to the North ',' Arrow of God']
+        // unique:['Things Fall Apart','Disgrace ',' Cry, the Beloved Country'
+        //     ,' Season of Migration to the North ',' Arrow of God']
     
     },
     reviews:{
