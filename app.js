@@ -130,6 +130,7 @@ app.get('/books',(req,res)=>{
         })
 
 })
+//render book by id
 
 app.get('/book/:id', (req, res) => {
 
@@ -144,6 +145,8 @@ app.get('/book/:id', (req, res) => {
     })
     
 })
+
+//render author data 
 
 app.get('/author/:author', (req, res) => {
 
@@ -166,16 +169,12 @@ app.get('/author/:author', (req, res) => {
     
 })
 
-
+//get the list of reviews
 
 
 app.get('/reviews', (req, res) => {
 
     Review.find().then((result)=>{
-
-          
-       
-        
 
         res.render('reviews',{result})
         
@@ -186,3 +185,7 @@ app.get('/reviews', (req, res) => {
 
 
 })
+
+///put or patch request
+
+///deletete request

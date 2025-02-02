@@ -31,41 +31,7 @@
     <h4 class="title">
    Book Language: <%=result.language%>
     </h4>
-    <!-- <a href="" class="edit" data ="<%=result.id%>">update</a> -->
-    <a href="" class="delete" data ="<%=result.id%>">BUY Me</a>
-    <%-include("./partials/footer.ejs")%>
-
-    <!-- <script>
-        
-        const delet=document.querySelector('a.delete');
-        const update=document.querySelector('a.edit');
-        console.log(delet);
-        delet.addEventListener('click',(e)=>{
-            event.preventDefault()
-            const id = delet.getAttribute('data');
-            console.log(`id is ${id}`);
-            base=`/president/${id}`
-            fetch(base, {
-                method:'delete'
-            }).then((result)=>{
-                console.log('file delete');
-                
-            }).catch(Error=>{
-                console.log(Error);
-            })
-                window.location.href='http://localhost:3000'
-            
-        })
-
-        update.addEventListener('click',(e)=>{
-            event.preventDefault()
-            const id = update.getAttribute('data');
-
-            window.location.href='http://localhost:3000////'
-            
-        })
-        
-    </script> -->
+    
 </body>
 
 </html>
