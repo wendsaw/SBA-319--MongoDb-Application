@@ -10,7 +10,7 @@ const Review=require('./models/reviews');
 const app=express();
 app.use(express.json());
 
-
+//coonecting to the database before connecting to local host 3000
 
 mongoose.connect(process.env.URL).then(()=>{
     app.listen(3000,()=>{
@@ -42,7 +42,9 @@ app.get('/',(req,res)=>{
    
    })
 
-//add books to the data base
+//post request
+
+//addbook to the data base
 
 app.post('/addbooks', (req,res)=>{
     const book = new Book({
@@ -113,7 +115,9 @@ app.post('/books/reviews', (req,res)=>{
 
 })
 
-//render the list of books/
+//get request
+
+//get all the book in the database
 
 app.get('/books',(req,res)=>{
 
@@ -131,7 +135,7 @@ app.get('/books',(req,res)=>{
         })
 
 })
-//render book by id
+//get a spicific book using an id
 
 app.get('/book/:id', (req, res) => {
 
@@ -147,7 +151,28 @@ app.get('/book/:id', (req, res) => {
     
 })
 
-//render author data 
+//get all books by the same authors
+
+app.get('/books/:author',(req,res)=>{
+
+    Book.find({author:req.params.author}).then((result)=>{
+
+      
+        // res.send(result)
+        
+
+        res.status(200).send(result)
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+
+})
+
+
+
+//getauthor detaisl author using the author name
 
 app.get('/author/:author', (req, res) => {
 
@@ -170,7 +195,7 @@ app.get('/author/:author', (req, res) => {
     
 })
 
-//get the list of reviews
+//get all the book reviews
 
 
 app.get('/reviews', (req, res) => {
@@ -186,7 +211,7 @@ app.get('/reviews', (req, res) => {
 
 
 })
-
+ ///get a specific review on a book using the book name
 
 app.get('/reviews/form', (req,res)=>{
 
