@@ -33,6 +33,8 @@ app.set('view engine', 'ejs');
 //middleware
 
 app.use(express.static("./public"));
+
+
 //home page
 
 app.get('/',(req,res)=>{
@@ -72,7 +74,7 @@ app.post('/addbooks', (req,res)=>{
 })
 //add authors to the data base
 
-app.post('/books/author', (req,res)=>{
+app.post('/book/author', (req,res)=>{
     const author = new Author({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -94,14 +96,13 @@ app.post('/books/author', (req,res)=>{
 
 //add reviews to the data base
 
-app.post('/books/reviews', (req,res)=>{
+app.post('/book/reviews', (req,res)=>{
     const reviews = new Review({
         Name: req.body.Name,
         bookTitle: req.body.bookTitle,
         reviews: req.body.reviews,
         datereviews:req.body.datereviews
 
-        
     })
     console.log(reviews)
     reviews.save()
@@ -121,13 +122,9 @@ app.post('/books/reviews', (req,res)=>{
 
 app.get('/books',(req,res)=>{
 
-        Book.find().then((result)=>{
-
-          
-            // res.send(result)
-            
-
-            res.render('books',{result})
+        Book.find()
+        .then((result)=>{
+            res.status(200).send(result)
             
         }).catch((err)=>{
             console.log(err);
@@ -135,14 +132,14 @@ app.get('/books',(req,res)=>{
         })
 
 })
-//get a spicific book using an id
+//get a spicific book using an title
 
-app.get('/book/:id', (req, res) => {
+app.get('/book/:title', (req, res) => {
 
-    Book.findById(req.params.id)
+    Book.find({title:req.params.title})
     .then((result)=>{
 
-        res.render('bookdetails', {result})
+        res.status(200).send(result)
         
     }).catch((err)=>{
         console.log(err);
@@ -150,6 +147,24 @@ app.get('/book/:id', (req, res) => {
     })
     
 })
+
+//get a spicific book using an id
+
+app.get('/:id', (req,res) => {
+
+    console.log('hello');
+    Book.findById(req.params.id)
+    .then((result)=>{
+
+    res.status(200).send(result)
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+    
+})
+
 
 //get all books by the same authors
 
@@ -167,7 +182,6 @@ app.get('/books/:author',(req,res)=>{
     })
 
 })
-
 
 
 //get author detail by using author name
