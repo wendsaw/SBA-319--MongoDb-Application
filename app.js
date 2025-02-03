@@ -155,11 +155,9 @@ app.get('/book/:id', (req, res) => {
 
 app.get('/books/:author',(req,res)=>{
 
-    Book.find({author:req.params.author}).then((result)=>{
-
-      
-        // res.send(result)
-        
+    Book.find({author:req.params.author})
+    .then((result)=>{
+  
 
         res.status(200).send(result)
         
@@ -172,7 +170,7 @@ app.get('/books/:author',(req,res)=>{
 
 
 
-//getauthor detaisl author using the author name
+//get author detail by using author name
 
 app.get('/author/:author', (req, res) => {
 
@@ -184,7 +182,7 @@ app.get('/author/:author', (req, res) => {
 
         console.log(results[0].nationalite);
         
-        res.render('author', {results})
+        res.status(200).send(results)
         
     }).catch((err)=>{
         console.log(err);
@@ -202,7 +200,7 @@ app.get('/reviews', (req, res) => {
 
     Review.find().then((result)=>{
 
-        res.render('reviews',{result})
+        res.status(200).send(result)
         
     }).catch((err)=>{
         console.log(err);
@@ -213,14 +211,20 @@ app.get('/reviews', (req, res) => {
 })
  ///get a specific review on a book using the book name
 
-app.get('/reviews/form', (req,res)=>{
+ app.get('/reviews/:title', (req, res) => {
 
+    Review.find({bookTitle:req.params.title}).then((result)=>{
 
-    
-        res.render('reviewform')
-   
-})
+        res.status(200).send(result)
+        
+    }).catch((err)=>{
+        console.log(err);
+        
+    })
+ })
 
 ///put or patch request
+
+
 
 ///deletete request
