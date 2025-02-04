@@ -167,7 +167,7 @@ app.get('/:id', (req,res) => {
 
 //get all books by the same authors
 
-app.get('/books/:author',(req,res)=>{
+app.get('/book/:author',(req,res)=>{
 
     Book.find({author:req.params.author})
     .then((result)=>{
@@ -208,8 +208,7 @@ app.get('/author/:author', (req, res) => {
 
 //get all the book reviews
 
-
-app.get('/reviews', (req, res) => {
+app.get('/data/reviews', (req, res) => {
 
     Review.find().then((result)=>{
 
@@ -222,7 +221,7 @@ app.get('/reviews', (req, res) => {
 
 
 })
- ///get a specific review on a book using the book name
+//  /get a specific review on a book using the book name
 
  app.get('/reviews/:title', (req, res) => {
 
@@ -242,7 +241,7 @@ app.get('/reviews', (req, res) => {
 
 app.put('/book/:title', (req ,res)=>{
 
-    console.log(req.body);
+    
     Book.updateOne({title:req.params.title},req.body)
     .then((result)=>{
 
@@ -259,7 +258,7 @@ app.put('/book/:title', (req ,res)=>{
 
 app.put('/author/:author', (req ,res)=>{
 
-    console.log(req.body);
+    
     Author.updateOne({lastName:req.params.author},req.body)
     .then((result)=>{
 
@@ -274,12 +273,14 @@ app.put('/author/:author', (req ,res)=>{
 
 //update book review by using reviewer name
 
-app.put('/author/:author', (req ,res)=>{
+app.put('/review/:id', (req ,res)=>{
 
-    console.log(req.body);
-    Author.updateOne({lastName:req.params.author},req.body)
+    
+    Review.findByIdAndUpdate(req.params.id,req.body)
     .then((result)=>{
 
+        console.log("updated");
+        
         res.status(200).send(result)
 
     }).catch((err)=>{
@@ -291,7 +292,70 @@ app.put('/author/:author', (req ,res)=>{
 
 
 
-
-
-
 ///deletete request
+
+// delete a book by title
+
+app.delete('/book/:title', (req ,res)=>{
+
+    
+    Book.deleteOne({title:req.params.title})
+    .then((result)=>{
+
+        res.status(200).send(result)
+
+    }).catch((err)=>{
+        res.status(500).send({err:"could not delete doc"})
+    })
+    
+    
+})
+
+//delete an author by name
+
+app.delete('/author/:author', (req ,res)=>{
+
+    
+    Author.deleteOne({lastName:req.params.author})
+    .then((result)=>{
+
+        res.status(200).send(result)
+
+    }).catch((err)=>{
+        res.status(500).send({err:"could not delete doc"})
+    })
+    
+})
+
+//delete a reviewer using id
+
+app.delete('/review/:id', (req ,res)=>{
+
+    console.log(req.body);
+    Review.findByIdAndDelete(req.params.id)
+    .then((result)=>{
+
+        
+        
+        res.status(200).send(result)
+
+    }).catch((err)=>{
+        res.status(500).send({err:"could not delete doc"})
+    })
+
+})
+
+//creeate an index to get books rating
+
+app.get('/books/:index', (req,res)=>{
+
+   console.log(req.params.index);
+   Book.createIndexes({rating:req.params.index})
+    Book.find({rating:req.params.index}).then((result)=>{
+        res.status(200).send(result)
+    }).catch((err)=>{
+        res.status(500).send({err:"index could not find"})
+    })
+})
+
+
