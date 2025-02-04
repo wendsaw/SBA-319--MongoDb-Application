@@ -48,7 +48,7 @@ app.get('/',(req,res)=>{
 
 //addbook to the data base
 
-app.post('/addbooks', (req,res)=>{
+app.post('/book', (req,res)=>{
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
@@ -58,12 +58,11 @@ app.post('/addbooks', (req,res)=>{
         rating:req.body.rating,
         words:req.body.words,
         language:req.body.language,
-    
     })
     console.log(book)
     book.save()
     .then((result)=>{
-        res.send(result)
+        res.status(200).send(result)
     }).catch((err)=>{
 
         res.status(500).send(err)
@@ -74,7 +73,7 @@ app.post('/addbooks', (req,res)=>{
 })
 //add authors to the data base
 
-app.post('/book/author', (req,res)=>{
+app.post('/author', (req,res)=>{
     const author = new Author({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -255,6 +254,43 @@ app.put('/book/:title', (req ,res)=>{
     
     
 })
+
+//update author by using the author last name
+
+app.put('/author/:author', (req ,res)=>{
+
+    console.log(req.body);
+    Author.updateOne({lastName:req.params.author},req.body)
+    .then((result)=>{
+
+        res.status(200).send(result)
+
+    }).catch((err)=>{
+        res.status(500).send({err:"could not update doc"})
+    })
+    
+    
+})
+
+//update book review by using reviewer name
+
+app.put('/author/:author', (req ,res)=>{
+
+    console.log(req.body);
+    Author.updateOne({lastName:req.params.author},req.body)
+    .then((result)=>{
+
+        res.status(200).send(result)
+
+    }).catch((err)=>{
+        res.status(500).send({err:"could not update doc"})
+    })
+    
+    
+})
+
+
+
 
 
 
