@@ -239,6 +239,23 @@ app.get('/reviews', (req, res) => {
 
 ///put or patch request
 
+//update a book by using the title of the book
+
+app.put('/book/:title', (req ,res)=>{
+
+    console.log(req.body);
+    Book.updateOne({title:req.params.title},req.body)
+    .then((result)=>{
+
+        res.status(200).send(result)
+
+    }).catch((err)=>{
+        res.status(500).send({err:"could not update doc"})
+    })
+    
+    
+})
+
 
 
 ///deletete request
